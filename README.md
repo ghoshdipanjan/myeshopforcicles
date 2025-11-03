@@ -100,12 +100,18 @@ myeshopforcicles/
 
 - This is a demo application. Payment processing is simulated and no real transactions occur.
 - Product data is stored in-memory and will reset when the server restarts.
+- Debug mode is enabled by default for development. For production deployment, set `FLASK_DEBUG=False` environment variable.
 - For production use, consider adding:
   - Database integration (SQLite, PostgreSQL, etc.)
   - User authentication
   - Real payment processing
   - Order history
   - Admin panel for product management
+  - Set `SECRET_KEY` environment variable to a secure random value
+  - Disable debug mode (`FLASK_DEBUG=False`)
+  - Use a production WSGI server (Gunicorn, uWSGI, etc.)
+  - Add HTTPS/SSL certificates
+  - Implement proper error handling and logging
 
 ## License
 
