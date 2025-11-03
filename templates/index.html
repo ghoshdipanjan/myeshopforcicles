@@ -19,7 +19,7 @@
             <div class="product-info">
                 <h3>{{ cycle.name }}</h3>
                 <p class="product-category">{{ cycle.category }}</p>
-                <p class="product-description">{{ cycle.description[:80] }}...</p>
+                <p class="product-description">{{ cycle.description[:80] }}{% if cycle.description|length > 80 %}...{% endif %}</p>
                 <div class="product-footer">
                     <span class="product-price">${{ "%.2f"|format(cycle.price) }}</span>
                     <span class="product-stock">

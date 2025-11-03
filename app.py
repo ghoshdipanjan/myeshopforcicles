@@ -3,7 +3,9 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-change-in-production'
+# Use environment variable for secret key in production
+# Generate a secure key with: python -c 'import secrets; print(secrets.token_hex())'
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Sample cycle data
 CYCLES = [
