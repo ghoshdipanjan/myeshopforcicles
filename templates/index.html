@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Cycle E-Shop{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to Cycle E-Shop</h1>
+    <p class="hero-subtitle">Find your perfect ride from our extensive collection of quality cycles</p>
+</div>
+
+<section class="products-section">
+    <h2>Our Cycles</h2>
+    <div class="products-grid">
+        {% for cycle in cycles %}
+        <div class="product-card">
+            <div class="product-image">
+                <div class="placeholder-image">🚴</div>
+            </div>
+            <div class="product-info">
+                <h3>{{ cycle.name }}</h3>
+                <p class="product-category">{{ cycle.category }}</p>
+                <p class="product-description">{{ cycle.description[:80] }}{% if cycle.description|length > 80 %}...{% endif %}</p>
+                <div class="product-footer">
+                    <span class="product-price">${{ "%.2f"|format(cycle.price) }}</span>
+                    <span class="product-stock">
+                        {% if cycle.stock > 0 %}
+                            <span class="in-stock">In Stock: {{ cycle.stock }}</span>
+                        {% else %}
+                            <span class="out-of-stock">Out of Stock</span>
+                        {% endif %}
+                    </span>
+                </div>
+                <a href="{{ url_for('product_detail', product_id=cycle.id) }}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

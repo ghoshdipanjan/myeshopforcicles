@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ cycle.name }} - Cycle E-Shop{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <div class="product-detail-grid">
+        <div class="product-detail-image">
+            <div class="placeholder-image-large">🚴</div>
+        </div>
+        <div class="product-detail-info">
+            <h1>{{ cycle.name }}</h1>
+            <p class="product-category">{{ cycle.category }}</p>
+            <p class="product-price-large">${{ "%.2f"|format(cycle.price) }}</p>
+            
+            <div class="product-stock-info">
+                {% if cycle.stock > 0 %}
+                    <span class="in-stock">✓ In Stock: {{ cycle.stock }} available</span>
+                {% else %}
+                    <span class="out-of-stock">✗ Out of Stock</span>
+                {% endif %}
+            </div>
+            
+            <p class="product-description-full">{{ cycle.description }}</p>
+            
+            {% if cycle.stock > 0 %}
+            <form method="POST" action="{{ url_for('add_to_cart', product_id=cycle.id) }}" class="add-to-cart-form">
+                <div class="quantity-selector">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ cycle.stock }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Add to Cart</button>
+            </form>
+            {% else %}
+            <button class="btn btn-disabled btn-large" disabled>Out of Stock</button>
+            {% endif %}
+            
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">← Back to Products</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
